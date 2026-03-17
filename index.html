@@ -1,0 +1,1686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Hamza Saadi — Python & Automation Developer | Morocco</title>
+<meta name="description" content="Hamza Saadi — Python & Automation Developer in Morocco. WhatsApp Bots, Billing Systems, Custom APIs. Built for Moroccan businesses. Économisez du temps avec l'automatisation."/>
+<meta name="keywords" content="développeur python maroc, automation maroc, bot whatsapp maroc, système facturation maroc, API développeur casablanca, automatisation entreprise, مطور بايثون المغرب, بوت واتساب"/>
+<meta property="og:title" content="Hamza Saadi — Automation Developer"/>
+<meta property="og:description" content="I help Moroccan businesses save time & money through smart automation."/>
+<meta property="og:type" content="website"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+<style>
+/* ═══════════════════════════════════
+   ROOT & RESET
+═══════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:       #0A0A0F;
+  --bg-card:  #12121A;
+  --gold:     #C9A84C;
+  --gold-dim: #a8863a;
+  --teal:     #2DD4BF;
+  --white:    #F5F5F0;
+  --muted:    #888896;
+  --border:   rgba(201,168,76,0.15);
+  --glass:    rgba(18,18,26,0.7);
+  --ff-display: 'Cormorant Garamond', serif;
+  --ff-body:    'Outfit', sans-serif;
+  --transition: 0.4s cubic-bezier(0.16,1,0.3,1);
+}
+
+html { scroll-behavior: smooth; cursor: none; }
+
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: var(--ff-body);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ═══════════════════════════════════
+   CUSTOM CURSOR
+═══════════════════════════════════ */
+#cursor {
+  position: fixed;
+  width: 12px; height: 12px;
+  background: var(--gold);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%,-50%);
+  transition: transform 0.1s, width 0.3s, height 0.3s, opacity 0.3s;
+  mix-blend-mode: screen;
+}
+#cursor-ring {
+  position: fixed;
+  width: 36px; height: 36px;
+  border: 1px solid rgba(201,168,76,0.4);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%,-50%);
+  transition: transform 0.18s cubic-bezier(0.16,1,0.3,1), width 0.4s, height 0.4s;
+}
+body:has(a:hover) #cursor,
+body:has(button:hover) #cursor { width: 20px; height: 20px; }
+
+/* ═══════════════════════════════════
+   LOADING SCREEN
+═══════════════════════════════════ */
+#loader {
+  position: fixed; inset: 0;
+  background: var(--bg);
+  z-index: 10000;
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 20px;
+  animation: loaderOut 0.6s ease 1.4s forwards;
+}
+.loader-name {
+  font-family: var(--ff-display);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 300;
+  color: var(--gold);
+  letter-spacing: 0.2em;
+  animation: loaderFade 1.2s ease forwards;
+}
+.loader-bar {
+  width: 200px; height: 1px;
+  background: var(--border);
+  position: relative; overflow: hidden;
+}
+.loader-bar::after {
+  content: '';
+  position: absolute; left: -100%; top: 0;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  animation: loaderScan 1s ease 0.2s forwards;
+}
+@keyframes loaderFade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@keyframes loaderScan { from { left: -100%; } to { left: 200%; } }
+@keyframes loaderOut  { to { opacity: 0; pointer-events: none; visibility: hidden; } }
+
+/* ═══════════════════════════════════
+   NAV
+═══════════════════════════════════ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 1000;
+  padding: 18px 5%;
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(10,10,15,0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  transition: var(--transition);
+}
+.nav-logo {
+  font-family: var(--ff-display);
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--gold);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+}
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: color 0.3s;
+  font-weight: 500;
+}
+.nav-links a:hover { color: var(--gold); }
+.nav-cta {
+  padding: 9px 22px;
+  background: transparent;
+  border: 1px solid var(--gold);
+  border-radius: 2px;
+  color: var(--gold);
+  font-family: var(--ff-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: none;
+  text-decoration: none;
+  transition: var(--transition);
+}
+.nav-cta:hover { background: var(--gold); color: var(--bg); }
+.nav-hamburger { display: none; background: none; border: none; cursor: none; flex-direction: column; gap: 5px; padding: 4px; }
+.nav-hamburger span { width: 24px; height: 1px; background: var(--gold); display: block; transition: var(--transition); }
+
+/* ═══════════════════════════════════
+   HERO
+═══════════════════════════════════ */
+#hero {
+  min-height: 100vh;
+  display: flex; align-items: center;
+  position: relative;
+  overflow: hidden;
+  padding: 120px 5% 80px;
+}
+
+/* Animated terminal grid background */
+.hero-bg {
+  position: absolute; inset: 0;
+  overflow: hidden;
+  z-index: 0;
+}
+.hero-bg::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+  animation: gridShift 20s linear infinite;
+}
+.hero-bg::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 80% 70% at 70% 50%, rgba(201,168,76,0.06) 0%, transparent 70%),
+              radial-gradient(ellipse 50% 60% at 15% 80%, rgba(45,212,191,0.05) 0%, transparent 60%);
+}
+@keyframes gridShift { to { transform: translate(60px, 60px); } }
+
+/* Floating code particles */
+.code-lines {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none; overflow: hidden;
+}
+.code-line {
+  position: absolute;
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  color: rgba(201,168,76,0.12);
+  white-space: nowrap;
+  animation: codeDrift linear infinite;
+}
+@keyframes codeDrift {
+  from { transform: translateY(100vh); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  to   { transform: translateY(-20vh); opacity: 0; }
+}
+
+.hero-content {
+  position: relative; z-index: 2;
+  max-width: 800px;
+}
+.availability-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 14px;
+  background: rgba(45,212,191,0.08);
+  border: 1px solid rgba(45,212,191,0.25);
+  border-radius: 100px;
+  font-size: 0.78rem;
+  color: var(--teal);
+  letter-spacing: 0.06em;
+  margin-bottom: 2rem;
+  font-weight: 500;
+  opacity: 0;
+  animation: heroFadeUp 0.8s ease 0.2s forwards;
+}
+.availability-dot {
+  width: 8px; height: 8px;
+  background: var(--teal);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(45,212,191,0.4); }
+  50%       { box-shadow: 0 0 0 6px rgba(45,212,191,0); }
+}
+
+.hero-title {
+  font-family: var(--ff-display);
+  font-size: clamp(2.6rem, 6vw, 5.2rem);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: heroFadeUp 0.9s ease 0.4s forwards;
+}
+.hero-title .gold { color: var(--gold); font-style: italic; }
+.hero-title .teal { color: var(--teal); }
+
+.hero-sub {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: var(--muted);
+  font-weight: 300;
+  margin-bottom: 2.8rem;
+  max-width: 560px;
+  opacity: 0;
+  animation: heroFadeUp 0.9s ease 0.6s forwards;
+  line-height: 1.7;
+}
+.hero-sub strong { color: var(--white); font-weight: 500; }
+
+.hero-actions {
+  display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;
+  opacity: 0;
+  animation: heroFadeUp 0.9s ease 0.8s forwards;
+}
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 16px 32px;
+  background: var(--gold);
+  color: var(--bg);
+  text-decoration: none;
+  font-family: var(--ff-body);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  border-radius: 2px;
+  border: none;
+  cursor: none;
+  position: relative;
+  overflow: hidden;
+  animation: btnPulse 3s ease 2s infinite;
+  transition: var(--transition);
+}
+.btn-primary::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+}
+.btn-primary:hover::before { transform: translateX(100%); }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 20px 40px rgba(201,168,76,0.3); }
+@keyframes btnPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(201,168,76,0.5); }
+  50%       { box-shadow: 0 0 0 12px rgba(201,168,76,0); }
+}
+
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 8px;
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.3s;
+  cursor: none;
+}
+.btn-ghost:hover { color: var(--white); }
+.btn-ghost i { font-size: 0.75rem; transition: transform 0.3s; }
+.btn-ghost:hover i { transform: translateX(4px); }
+
+/* Hero decorative right element */
+.hero-deco {
+  position: absolute; right: 5%; top: 50%; transform: translateY(-50%);
+  width: min(380px, 40vw);
+  z-index: 2;
+  opacity: 0;
+  animation: heroFadeUp 1.2s ease 0.9s forwards;
+}
+.terminal-window {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(201,168,76,0.1);
+}
+.terminal-bar {
+  background: rgba(201,168,76,0.06);
+  padding: 10px 14px;
+  display: flex; align-items: center; gap: 8px;
+  border-bottom: 1px solid var(--border);
+}
+.t-dot { width: 10px; height: 10px; border-radius: 50%; }
+.t-dot.r { background: #FF5F57; }
+.t-dot.y { background: #FFBD2E; }
+.t-dot.g { background: #28CA41; }
+.terminal-body { padding: 20px; font-family: 'Courier New', monospace; font-size: 0.78rem; line-height: 1.9; }
+.t-prompt { color: var(--teal); }
+.t-cmd { color: var(--white); }
+.t-output { color: var(--gold); margin-left: 12px; }
+.t-muted { color: var(--muted); margin-left: 12px; }
+.t-success { color: #4ADE80; margin-left: 12px; }
+.t-cursor { display: inline-block; width: 8px; height: 14px; background: var(--gold); animation: blink 1s step-end infinite; vertical-align: middle; }
+@keyframes blink { 50% { opacity: 0; } }
+
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ═══════════════════════════════════
+   SECTION SHARED STYLES
+═══════════════════════════════════ */
+section { padding: clamp(60px, 10vw, 120px) 5%; position: relative; }
+
+.section-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1rem;
+  display: flex; align-items: center; gap: 12px;
+}
+.section-label::before {
+  content: '';
+  width: 30px; height: 1px;
+  background: var(--gold);
+}
+
+.section-title {
+  font-family: var(--ff-display);
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin-bottom: 1rem;
+}
+.section-title .italic { font-style: italic; color: var(--gold); }
+
+/* Scroll-reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* Diagonal divider */
+.diagonal-divider {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 80px; overflow: hidden; z-index: 1;
+}
+.diagonal-divider svg { display: block; width: 100%; height: 100%; }
+
+/* ═══════════════════════════════════
+   PROBLEMS SECTION
+═══════════════════════════════════ */
+#problems {
+  background: linear-gradient(180deg, var(--bg) 0%, #0E0E16 100%);
+}
+.problems-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2px;
+  margin-top: 4rem;
+}
+.problem-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 3rem 2.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition);
+  cursor: default;
+}
+.problem-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  transform: scaleX(0);
+  transition: transform 0.5s ease;
+}
+.problem-card:hover::before { transform: scaleX(1); }
+.problem-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.4), 0 0 0 1px rgba(201,168,76,0.2);
+  background: #15151F;
+}
+.problem-card .card-emoji { font-size: 2.5rem; margin-bottom: 1.2rem; display: block; }
+.problem-card .card-problem {
+  font-family: var(--ff-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+.problem-card .card-pain {
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+.problem-card .card-solution {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 14px 16px;
+  background: rgba(45,212,191,0.06);
+  border: 1px solid rgba(45,212,191,0.15);
+  border-radius: 4px;
+  font-size: 0.88rem;
+  color: var(--teal);
+  line-height: 1.5;
+  font-weight: 500;
+}
+.problem-card .card-solution::before { content: '→'; font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+
+/* ═══════════════════════════════════
+   PROJECTS
+═══════════════════════════════════ */
+#projects {
+  background: #0E0E16;
+}
+.projects-grid {
+  display: flex;
+  flex-direction: column;
+  margin-top: 4rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.project-card {
+  display: grid;
+  grid-template-columns: 1fr;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-card);
+  transition: background 0.35s ease;
+  position: relative;
+}
+.project-card:last-child { border-bottom: none; }
+.project-card:hover { background: #14141e; }
+
+@media(min-width: 780px){
+  .project-card { grid-template-columns: 1fr 300px; }
+}
+@media(min-width: 1100px){
+  .project-card { grid-template-columns: 1fr 340px; }
+}
+
+/* Left: content */
+.project-info {
+  padding: 2.6rem 2.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-right: 1px solid var(--border);
+}
+@media(max-width:779px){ .project-info { border-right: none; border-bottom: 1px solid var(--border); } }
+
+.project-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 2rem;
+}
+.project-icon-box {
+  width: 40px; height: 40px;
+  background: rgba(201,168,76,0.1);
+  border: 1px solid rgba(201,168,76,0.25);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem;
+  color: var(--gold);
+  flex-shrink: 0;
+}
+.project-name {
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.project-meta { display: flex; flex-direction: column; gap: 1.2rem; flex: 1; }
+
+.project-section-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.3rem;
+}
+.project-text {
+  font-size: 0.9rem;
+  color: var(--white);
+  line-height: 1.65;
+  font-weight: 400;
+}
+.project-text.muted { color: var(--muted); }
+
+.project-stack {
+  display: flex; flex-wrap: wrap; gap: 7px;
+  margin-top: 0.4rem;
+}
+.stack-tag {
+  padding: 3px 11px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 100px;
+  font-size: 0.72rem;
+  color: var(--muted);
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  transition: border-color 0.3s, color 0.3s;
+}
+.project-card:hover .stack-tag { border-color: rgba(201,168,76,0.2); color: rgba(201,168,76,0.8); }
+
+/* Right: result panel */
+.project-result-panel {
+  padding: 2.4rem 2.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: #0f1a1a;
+  position: relative;
+  overflow: hidden;
+  min-height: 200px;
+}
+.project-result-panel::before {
+  content: '';
+  position: absolute;
+  bottom: -40px; right: -40px;
+  width: 180px; height: 180px;
+  background: radial-gradient(circle, rgba(45,212,191,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+.project-result-panel::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(45,212,191,0.2), transparent);
+}
+@media(min-width:780px){
+  .project-result-panel::after {
+    top: 0; left: 0; bottom: 0; right: auto;
+    width: 1px; height: auto;
+    background: linear-gradient(180deg, transparent, rgba(45,212,191,0.15), transparent);
+  }
+}
+.result-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.8rem;
+}
+.result-text {
+  font-family: var(--ff-display);
+  font-size: clamp(1.3rem, 2.5vw, 1.75rem);
+  font-weight: 700;
+  color: var(--teal);
+  line-height: 1.25;
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+.result-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 1.6rem;
+  font-size: 0.82rem;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.3s;
+  cursor: none;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+.result-link:hover { color: var(--teal); }
+.result-link i { font-size: 0.7rem; }
+
+/* ═══════════════════════════════════
+   HOW WE WORK
+═══════════════════════════════════ */
+#process {
+  background: var(--bg);
+  overflow: hidden;
+}
+.process-bg {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 70% 60% at 50% 100%, rgba(201,168,76,0.04) 0%, transparent 70%);
+}
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin-top: 4rem;
+  position: relative;
+}
+.process-step {
+  padding: 2.4rem 2.2rem 2.2rem;
+  position: relative;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  border-radius: 12px;
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  overflow: hidden;
+}
+.process-step::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(201,168,76,0.025) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.4s;
+  border-radius: inherit;
+}
+.process-step:hover { border-color: rgba(201,168,76,0.25); background: #14141d; }
+.process-step:hover::before { opacity: 1; }
+
+.step-icon-box {
+  width: 44px; height: 44px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.15rem;
+  margin-bottom: 1.8rem;
+  flex-shrink: 0;
+  transition: background 0.3s, border-color 0.3s;
+}
+.process-step:hover .step-icon-box {
+  background: rgba(201,168,76,0.1);
+  border-color: rgba(201,168,76,0.25);
+}
+
+.step-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.3;
+  margin-bottom: 0.9rem;
+  letter-spacing: -0.01em;
+}
+.step-desc {
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.7;
+  flex: 1;
+  margin-bottom: 1.8rem;
+}
+.step-action {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--teal);
+  line-height: 1.4;
+}
+.step-action .arrow {
+  flex-shrink: 0;
+  margin-top: 1px;
+  font-size: 1rem;
+  color: var(--teal);
+}
+
+/* ═══════════════════════════════════
+   SOCIAL PROOF
+═══════════════════════════════════ */
+#proof {
+  background: #0E0E16;
+}
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2px;
+  margin-top: 3rem;
+}
+.stat-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 2.5rem 2rem;
+  text-align: center;
+  transition: var(--transition);
+}
+.stat-card:hover { background: #15151F; transform: translateY(-4px); }
+.stat-number {
+  font-family: var(--ff-display);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+.stat-number .unit { font-size: 1.5rem; }
+.stat-label { color: var(--muted); font-size: 0.88rem; letter-spacing: 0.04em; line-height: 1.4; }
+
+/* Testimonials slider */
+.testimonials-wrapper {
+  margin-top: 3rem;
+  position: relative;
+  overflow: hidden;
+}
+.testimonials-track {
+  display: flex;
+  gap: 2px;
+  transition: transform 0.6s cubic-bezier(0.16,1,0.3,1);
+}
+.testimonial-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 2.8rem 2.8rem 2.4rem;
+  flex: 0 0 calc(50% - 1px);
+  min-width: calc(50% - 1px);
+  position: relative;
+  transition: border-color 0.4s, background 0.4s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.testimonial-card:hover {
+  background: #15151F;
+  border-color: rgba(201,168,76,0.3);
+}
+.quote-icon {
+  width: 42px; height: 42px;
+  background: var(--gold);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 1.8rem;
+  flex-shrink: 0;
+}
+.quote-icon i {
+  color: var(--bg);
+  font-size: 0.9rem;
+}
+.testimonial-text {
+  font-family: var(--ff-display);
+  font-size: clamp(1rem, 1.6vw, 1.15rem);
+  line-height: 1.85;
+  color: var(--white);
+  font-style: italic;
+  font-weight: 300;
+  flex: 1;
+  margin-bottom: 2rem;
+}
+.testimonial-author {
+  display: flex; align-items: center; gap: 14px;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+.author-avatar {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700;
+  color: var(--bg);
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+.av-gold   { background: linear-gradient(135deg, #C9A84C, #a8863a); }
+.av-teal   { background: linear-gradient(135deg, #2DD4BF, #1aaa96); }
+.av-slate  { background: linear-gradient(135deg, #6366f1, #4f46e5); }
+.av-rose   { background: linear-gradient(135deg, #f43f5e, #be123c); }
+.av-emerald{ background: linear-gradient(135deg, #10b981, #047857); }
+
+.author-name { font-weight: 600; font-size: 0.92rem; color: var(--white); }
+.author-role { color: var(--muted); font-size: 0.78rem; margin-top: 2px; line-height: 1.4; }
+
+/* Slider nav */
+.testimonials-nav {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-top: 2rem;
+}
+.testimonials-dots {
+  display: flex; gap: 8px;
+}
+.t-dot-btn {
+  width: 6px; height: 6px;
+  border-radius: 100px;
+  background: var(--border);
+  border: none; cursor: none;
+  transition: all 0.4s;
+  padding: 0;
+}
+.t-dot-btn.active {
+  background: var(--gold);
+  width: 24px;
+}
+.testimonials-arrows { display: flex; gap: 10px; }
+.t-arrow {
+  width: 42px; height: 42px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  cursor: none;
+  color: var(--muted);
+  font-size: 0.8rem;
+  transition: var(--transition);
+}
+.t-arrow:hover { border-color: var(--gold); color: var(--gold); background: rgba(201,168,76,0.06); }
+
+@media(max-width:720px){
+  .testimonial-card { flex: 0 0 100%; min-width: 100%; padding: 2rem 1.6rem; }
+}
+
+/* ═══════════════════════════════════
+   FINAL CTA
+═══════════════════════════════════ */
+#contact {
+  background: var(--bg);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.contact-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 50%, rgba(201,168,76,0.05) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 80% 20%, rgba(45,212,191,0.04) 0%, transparent 60%);
+}
+.contact-deco {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(201,168,76,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201,168,76,0.03) 1px, transparent 1px);
+  background-size: 80px 80px;
+}
+.contact-content { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
+.contact-title {
+  font-family: var(--ff-display);
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+  line-height: 1.1;
+}
+.contact-title .italic { font-style: italic; color: var(--gold); }
+.contact-sub {
+  font-size: 1.05rem;
+  color: var(--muted);
+  margin-bottom: 3rem;
+  line-height: 1.7;
+  max-width: 480px;
+  margin-left: auto; margin-right: auto;
+}
+.contact-actions { display: flex; flex-direction: column; align-items: center; gap: 1.2rem; }
+.btn-large {
+  display: inline-flex; align-items: center; gap: 12px;
+  padding: 20px 44px;
+  background: var(--gold);
+  color: var(--bg);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: 0.04em;
+  border-radius: 2px;
+  transition: var(--transition);
+  animation: btnPulse 3s ease 1s infinite;
+  cursor: none;
+}
+.btn-large:hover { background: #dbb852; transform: translateY(-3px); box-shadow: 0 20px 50px rgba(201,168,76,0.35); }
+.btn-large i { font-size: 1.1rem; }
+.contact-emails {
+  display: flex; align-items: center; gap: 6px; flex-wrap: wrap; justify-content: center;
+  font-size: 0.87rem;
+  color: var(--muted);
+}
+.contact-emails a { color: var(--muted); text-decoration: none; transition: color 0.3s; cursor: none; }
+.contact-emails a:hover { color: var(--gold); }
+.contact-emails .sep { color: rgba(201,168,76,0.3); }
+
+/* ═══════════════════════════════════
+   FOOTER
+═══════════════════════════════════ */
+footer {
+  padding: 3rem 5%;
+  border-top: 1px solid var(--border);
+  background: #080810;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+.footer-brand {
+  font-family: var(--ff-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--gold);
+}
+.footer-brand span { font-weight: 300; color: var(--muted); font-style: italic; }
+.footer-links {
+  display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;
+}
+.footer-links a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.88rem;
+  transition: color 0.3s;
+  display: flex; align-items: center; gap: 6px;
+  cursor: none;
+}
+.footer-links a:hover { color: var(--gold); }
+.footer-links a i { font-size: 0.8rem; }
+.footer-tagline {
+  width: 100%;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-top: 1px solid var(--border);
+  padding-top: 2rem;
+  margin-top: 1rem;
+}
+
+/* ═══════════════════════════════════
+   FLOATING WHATSAPP
+═══════════════════════════════════ */
+.wa-float {
+  position: fixed;
+  bottom: 2rem; right: 2rem;
+  z-index: 9000;
+  display: flex; align-items: center; gap: 10px;
+  padding: 14px 20px;
+  background: #25D366;
+  border-radius: 100px;
+  text-decoration: none;
+  color: white;
+  font-weight: 700;
+  font-size: 0.9rem;
+  box-shadow: 0 10px 30px rgba(37,211,102,0.35);
+  transition: var(--transition);
+  cursor: none;
+  animation: floatBounce 4s ease infinite;
+}
+.wa-float:hover {
+  transform: translateY(-4px) scale(1.04);
+  box-shadow: 0 20px 50px rgba(37,211,102,0.5);
+}
+.wa-float i { font-size: 1.1rem; }
+.wa-float .wa-text { display: none; }
+@media(min-width:600px){ .wa-float .wa-text { display: block; } }
+@keyframes floatBounce {
+  0%, 100% { box-shadow: 0 10px 30px rgba(37,211,102,0.35); }
+  50%       { box-shadow: 0 15px 45px rgba(37,211,102,0.5); }
+}
+
+/* ═══════════════════════════════════
+   MOROCCAN ORNAMENT
+═══════════════════════════════════ */
+.ornament {
+  display: flex; align-items: center; gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+.ornament-line { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--border)); }
+.ornament-line.right { background: linear-gradient(90deg, var(--border), transparent); }
+.ornament-symbol {
+  color: var(--gold);
+  font-size: 1.2rem;
+  opacity: 0.4;
+}
+
+/* ═══════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════ */
+@media(max-width:900px){
+  .hero-deco { display: none; }
+  .hero-content { max-width: 100%; }
+  .nav-links { display: none; }
+  .nav-hamburger { display: flex; }
+  .nav-links.open {
+    display: flex; flex-direction: column;
+    position: fixed; inset: 0; top: 61px;
+    background: var(--bg);
+    padding: 2rem 5%;
+    gap: 2rem; z-index: 999;
+    border-top: 1px solid var(--border);
+  }
+  .nav-links.open a { font-size: 1.5rem; }
+}
+@media(max-width:480px){
+  .btn-large { padding: 16px 28px; font-size: 0.95rem; }
+  .project-info { padding: 2rem 1.5rem; }
+  .problem-card { padding: 2rem 1.5rem; }
+}
+
+/* Gradient text utility */
+.gradient-text {
+  background: linear-gradient(135deg, var(--gold), #e8c96e, var(--gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+</style>
+</head>
+<body>
+
+<!-- Custom cursor -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- Loading screen -->
+<div id="loader">
+  <div class="loader-name">Hamza Saadi</div>
+  <div class="loader-bar"></div>
+</div>
+
+<!-- Floating WhatsApp -->
+<a class="wa-float" href="https://wa.me/212700979284" target="_blank" rel="noopener">
+  <i class="fab fa-whatsapp"></i>
+  <span class="wa-text">WhatsApp</span>
+</a>
+
+<!-- ═══════════════════════════════════
+     NAV
+═══════════════════════════════════ -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">HS</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#problems" onclick="closeNav()">Problems</a></li>
+    <li><a href="#projects" onclick="closeNav()">Projects</a></li>
+    <li><a href="#process" onclick="closeNav()">Process</a></li>
+    <li><a href="#proof"   onclick="closeNav()">Results</a></li>
+  </ul>
+  <a href="https://wa.me/212700979284" target="_blank" class="nav-cta">Hire Me</a>
+  <button class="nav-hamburger" id="hamburger" onclick="toggleNav()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ═══════════════════════════════════
+     HERO
+═══════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="code-lines" id="codeLines"></div>
+
+  <div class="hero-content">
+    <div class="availability-badge">
+      <span class="availability-dot"></span>
+      🟢 Available for new projects
+    </div>
+
+    <h1 class="hero-title">
+      I help Moroccan<br>
+      businesses <span class="gold italic">save time</span><br>
+      & <span class="teal">money</span> through<br>
+      smart automation
+    </h1>
+
+    <p class="hero-sub">
+      <strong>WhatsApp Bots • Billing Systems • Custom APIs</strong><br>
+      — built in days, not months. No IT department needed.
+    </p>
+
+    <div class="hero-actions">
+      <a href="https://wa.me/212700979284" target="_blank" class="btn-primary">
+        <i class="fab fa-whatsapp"></i>
+        Tell me your problem
+        <span style="opacity:0.7; font-weight:400">→</span>
+      </a>
+      <a href="#projects" class="btn-ghost">
+        See my work <i class="fa fa-arrow-right"></i>
+      </a>
+    </div>
+  </div>
+
+  <!-- Terminal window decoration -->
+  <div class="hero-deco">
+    <div class="terminal-window">
+      <div class="terminal-bar">
+        <span class="t-dot r"></span>
+        <span class="t-dot y"></span>
+        <span class="t-dot g"></span>
+        <span style="color:var(--muted);font-size:0.75rem;margin-left:6px;font-family:monospace">automation.py</span>
+      </div>
+      <div class="terminal-body" id="terminalBody">
+        <div><span class="t-prompt">$</span> <span class="t-cmd">python automation.py</span></div>
+        <div><span class="t-muted">Connecting to WhatsApp API...</span></div>
+        <div><span class="t-success">✓ Bot online</span></div>
+        <div><span class="t-muted">Processing orders...</span></div>
+        <div><span class="t-output">Orders handled: <span id="orderCount">0</span></span></div>
+        <div><span class="t-output">Time saved: <span id="timeSaved">0</span>h today</span></div>
+        <div><span class="t-muted">Missed orders: </span><span style="color:#4ADE80">0</span></div>
+        <div style="margin-top:8px"><span class="t-prompt">$</span> <span class="t-cursor"></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     PROBLEMS
+═══════════════════════════════════ -->
+<section id="problems">
+  <div class="reveal">
+    <p class="section-label">Why clients come to me</p>
+    <h2 class="section-title">I solve <span class="italic">real</span> business problems</h2>
+    <p style="color:var(--muted);max-width:480px;margin-top:0.5rem;font-size:0.95rem;line-height:1.7">
+      Not looking for someone to admire my code. Looking for someone who will fix what's slowing you down.
+    </p>
+  </div>
+
+  <div class="problems-grid">
+    <div class="problem-card reveal reveal-delay-1">
+      <span class="card-emoji">📱</span>
+      <h3 class="card-problem">Losing orders on WhatsApp?</h3>
+      <p class="card-pain">50+ messages per day, no system, orders get lost, customers get frustrated. You're doing customer service instead of running your business.</p>
+      <div class="card-solution">I build bots that handle your orders 24/7 automatically</div>
+    </div>
+    <div class="problem-card reveal reveal-delay-2">
+      <span class="card-emoji">🧾</span>
+      <h3 class="card-problem">Still making invoices on Word/Excel?</h3>
+      <p class="card-pain">Copy-pasting, manual calculations, wrong TVA, unprofessional look. Every invoice costs you 15–30 minutes you don't have.</p>
+      <div class="card-solution">I build you a professional billing system in one week</div>
+    </div>
+    <div class="problem-card reveal reveal-delay-3">
+      <span class="card-emoji">⚙️</span>
+      <h3 class="card-problem">Spending hours on repetitive tasks?</h3>
+      <p class="card-pain">Data entry, follow-up messages, report generation, price tracking — tasks a computer could do in seconds while you sleep.</p>
+      <div class="card-solution">I automate them so you focus on what matters</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     PROJECTS
+═══════════════════════════════════ -->
+<section id="projects">
+  <div class="reveal">
+    <p class="section-label">Proof of work</p>
+    <h2 class="section-title">Systems that <span class="italic">actually shipped</span></h2>
+    <p style="color:var(--muted);max-width:520px;margin-top:0.5rem;font-size:0.95rem;line-height:1.7">
+      Every project below solved a real problem for a real business. Numbers are real.
+    </p>
+  </div>
+
+  <div class="projects-grid">
+
+    <!-- Project 1 -->
+    <div class="project-card reveal">
+      <div class="project-info">
+        <div class="project-header">
+          <div class="project-icon-box"><i class="fab fa-whatsapp"></i></div>
+          <div class="project-name">WhatsApp Order Bot</div>
+        </div>
+        <div class="project-meta">
+          <div>
+            <p class="project-section-label">The Problem</p>
+            <p class="project-text">A merchant received 50+ daily messages manually, losing orders and burning out.</p>
+          </div>
+          <div>
+            <p class="project-section-label">My Solution</p>
+            <p class="project-text muted">Automated WhatsApp bot handling orders, confirmations &amp; invoicing — works 24/7 without breaks.</p>
+          </div>
+          <div class="project-stack">
+            <span class="stack-tag">Python</span>
+            <span class="stack-tag">WhatsApp Cloud API</span>
+            <span class="stack-tag">PostgreSQL</span>
+          </div>
+        </div>
+      </div>
+      <div class="project-result-panel">
+        <div>
+          <p class="result-label">The Result</p>
+          <p class="result-text">Saved 3 hours/day, zero missed orders</p>
+        </div>
+        <a href="https://wa.me/212700979284" target="_blank" class="result-link">
+          View details <i class="fa fa-arrow-up-right-from-square"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- Project 2 -->
+    <div class="project-card reveal reveal-delay-1">
+      <div class="project-info">
+        <div class="project-header">
+          <div class="project-icon-box"><i class="fa fa-file-invoice"></i></div>
+          <div class="project-name">Moroccan Billing System</div>
+        </div>
+        <div class="project-meta">
+          <div>
+            <p class="project-section-label">The Problem</p>
+            <p class="project-text">Freelancer spent 2 hours/week making invoices in Word — errors, delays, unprofessional.</p>
+          </div>
+          <div>
+            <p class="project-section-label">My Solution</p>
+            <p class="project-text muted">Web app generating TVA-compliant PDF invoices in 30 seconds, sent directly via WhatsApp.</p>
+          </div>
+          <div class="project-stack">
+            <span class="stack-tag">Python/Flask</span>
+            <span class="stack-tag">JavaScript</span>
+            <span class="stack-tag">WeasyPrint</span>
+          </div>
+        </div>
+      </div>
+      <div class="project-result-panel">
+        <div>
+          <p class="result-label">The Result</p>
+          <p class="result-text">2 hours saved weekly, professional image improved</p>
+        </div>
+        <a href="https://wa.me/212700979284" target="_blank" class="result-link">
+          View details <i class="fa fa-arrow-up-right-from-square"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- Project 3 -->
+    <div class="project-card reveal reveal-delay-2">
+      <div class="project-info">
+        <div class="project-header">
+          <div class="project-icon-box"><i class="fa fa-house"></i></div>
+          <div class="project-name">Real Estate Price Tracker</div>
+        </div>
+        <div class="project-meta">
+          <div>
+            <p class="project-section-label">The Problem</p>
+            <p class="project-text">Buyers couldn't know if property prices were fair — wasted time on overpriced listings.</p>
+          </div>
+          <div>
+            <p class="project-section-label">My Solution</p>
+            <p class="project-text muted">Scraper aggregating Avito + Mubawab data with intelligent price alerts.</p>
+          </div>
+          <div class="project-stack">
+            <span class="stack-tag">Python</span>
+            <span class="stack-tag">BeautifulSoup</span>
+            <span class="stack-tag">FastAPI</span>
+            <span class="stack-tag">React</span>
+          </div>
+        </div>
+      </div>
+      <div class="project-result-panel">
+        <div>
+          <p class="result-label">The Result</p>
+          <p class="result-text">500+ users, price alerts via WhatsApp/Email</p>
+        </div>
+        <a href="https://wa.me/212700979284" target="_blank" class="result-link">
+          View details <i class="fa fa-arrow-up-right-from-square"></i>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     PROCESS
+═══════════════════════════════════ -->
+<section id="process">
+  <div class="process-bg"></div>
+  <div class="reveal" style="position:relative;z-index:1">
+    <p class="section-label">Working together</p>
+    <h2 class="section-title">Simple as <span class="italic">three steps</span></h2>
+    <p style="color:var(--muted);max-width:480px;margin-top:0.5rem;font-size:0.95rem;line-height:1.7">
+      No lengthy contracts, no IT jargon, no waiting 6 months. You describe your problem, I build the solution.
+    </p>
+  </div>
+
+  <div class="process-steps" style="position:relative;z-index:1;margin-top:4rem">
+
+    <div class="process-step reveal reveal-delay-1">
+      <div class="step-icon-box">💬</div>
+      <h3 class="step-title">You tell me your problem</h3>
+      <p class="step-desc">A quick 15-minute WhatsApp call. Tell me what slows you down, what's costing you time and money.</p>
+      <div class="step-action">
+        <span class="arrow">→</span>
+        <span>Free consultation — no commitment, no IT jargon</span>
+      </div>
+    </div>
+
+    <div class="process-step reveal reveal-delay-2">
+      <div class="step-icon-box">🛠️</div>
+      <h3 class="step-title">I build your solution</h3>
+      <p class="step-desc">3 to 14 days depending on scope. You get progress updates. No surprises, no delays, no excuses.</p>
+      <div class="step-action">
+        <span class="arrow">→</span>
+        <span>Fixed price agreed upfront before I write a single line</span>
+      </div>
+    </div>
+
+    <div class="process-step reveal reveal-delay-3">
+      <div class="step-icon-box">🚀</div>
+      <h3 class="step-title">You launch &amp; grow</h3>
+      <p class="step-desc">Your system goes live. I support you for 30 days free — bugs, questions, improvements. All included.</p>
+      <div class="step-action">
+        <span class="arrow">→</span>
+        <span>30 days free support included after every delivery</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     SOCIAL PROOF
+═══════════════════════════════════ -->
+<section id="proof">
+  <div class="reveal">
+    <p class="section-label">Results that speak</p>
+    <h2 class="section-title">Numbers don't <span class="italic">lie</span></h2>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card reveal reveal-delay-1">
+      <div class="stat-number"><span class="count" data-target="3">0</span><span class="unit">+</span></div>
+      <div class="stat-label">Systems built for<br>Moroccan businesses</div>
+    </div>
+    <div class="stat-card reveal reveal-delay-2">
+      <div class="stat-number"><span class="count" data-target="10">0</span><span class="unit">h</span></div>
+      <div class="stat-label">Average time saved<br>per client, per week</div>
+    </div>
+    <div class="stat-card reveal reveal-delay-3">
+      <div class="stat-number"><span class="count" data-target="1">0</span><span class="unit">h</span></div>
+      <div class="stat-label">Response time<br>under 1 hour</div>
+    </div>
+    <div class="stat-card reveal reveal-delay-4">
+      <div class="stat-number"><span class="count" data-target="30">0</span><span class="unit">d</span></div>
+      <div class="stat-label">Free support<br>after every project</div>
+    </div>
+  </div>
+
+  <div class="testimonials-wrapper reveal">
+    <div class="testimonials-track" id="testimonialsTrack">
+
+      <!-- 1 — E-commerce merchant -->
+      <div class="testimonial-card">
+        <div>
+          <div class="quote-icon"><i class="fa fa-quote-left"></i></div>
+          <p class="testimonial-text">"Before working with Hamza, I was spending 3+ hours daily just answering WhatsApp messages. Now my bot handles everything — orders, confirmations, even sends invoices. I can finally focus on growing my business."</p>
+        </div>
+        <div class="testimonial-author">
+          <div class="author-avatar av-gold">M</div>
+          <div>
+            <div class="author-name">Mohammed A.</div>
+            <div class="author-role">E-commerce Store Owner · Casablanca</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2 — Freelance designer -->
+      <div class="testimonial-card">
+        <div>
+          <div class="quote-icon"><i class="fa fa-quote-left"></i></div>
+          <p class="testimonial-text">"I'm a graphic designer, not an accountant. The billing system Hamza built me generates compliant PDF invoices in seconds and sends them directly to clients on WhatsApp. My clients actually comment on how professional I look now."</p>
+        </div>
+        <div class="testimonial-author">
+          <div class="author-avatar av-teal">S</div>
+          <div>
+            <div class="author-name">Sara K.</div>
+            <div class="author-role">Freelance Graphic Designer · Rabat</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 — Small import/export company -->
+      <div class="testimonial-card">
+        <div>
+          <div class="quote-icon"><i class="fa fa-quote-left"></i></div>
+          <p class="testimonial-text">"We were doing everything manually — tracking shipments, sending updates to clients, generating reports. Hamza automated the whole workflow in less than two weeks. Our team now focuses on actual business, not data entry."</p>
+        </div>
+        <div class="testimonial-author">
+          <div class="author-avatar av-slate">K</div>
+          <div>
+            <div class="author-name">Karim B.</div>
+            <div class="author-role">Operations Manager · Atlas Import & Export, Tanger</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 — Independent developer / peer -->
+      <div class="testimonial-card">
+        <div>
+          <div class="quote-icon"><i class="fa fa-quote-left"></i></div>
+          <p class="testimonial-text">"I referred a client to Hamza when their WhatsApp order volume got out of hand. The bot he delivered was clean, well-documented, and easy to maintain. As a developer myself, I was impressed by the code quality and how fast he shipped."</p>
+        </div>
+        <div class="testimonial-author">
+          <div class="author-avatar av-emerald">Y</div>
+          <div>
+            <div class="author-name">Yassine M.</div>
+            <div class="author-role">Full-stack Developer · Freelance, Marrakech</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5 — Real estate agency -->
+      <div class="testimonial-card">
+        <div>
+          <div class="quote-icon"><i class="fa fa-quote-left"></i></div>
+          <p class="testimonial-text">"The price tracker changed how our agents advise clients. Instead of guessing, we now have real data from Avito and Mubawab in one dashboard. Clients trust us more, deals close faster. Worth every dirham."</p>
+        </div>
+        <div class="testimonial-author">
+          <div class="author-avatar av-rose">N</div>
+          <div>
+            <div class="author-name">Nadia R.</div>
+            <div class="author-role">Co-founder · Dar Immo Agency, Casablanca</div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /track -->
+
+    <div class="testimonials-nav">
+      <div class="testimonials-dots" id="tDots"></div>
+      <div class="testimonials-arrows">
+        <button class="t-arrow" id="tPrev" aria-label="Previous"><i class="fa fa-chevron-left"></i></button>
+        <button class="t-arrow" id="tNext" aria-label="Next"><i class="fa fa-chevron-right"></i></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     FINAL CTA
+═══════════════════════════════════ -->
+<section id="contact">
+  <div class="contact-bg"></div>
+  <div class="contact-deco"></div>
+
+  <div class="contact-content">
+    <div class="ornament reveal">
+      <div class="ornament-line"></div>
+      <div class="ornament-symbol">✦</div>
+      <div class="ornament-line right"></div>
+    </div>
+
+    <h2 class="contact-title reveal">
+      Have a problem?<br><span class="italic">Let's solve it.</span>
+    </h2>
+
+    <p class="contact-sub reveal reveal-delay-1">
+      Tell me what slows you down — I'll tell you if I can fix it. Free consultation. No commitment. No IT jargon.
+    </p>
+
+    <div class="contact-actions reveal reveal-delay-2">
+      <a href="https://wa.me/212700979284" target="_blank" class="btn-large">
+        <i class="fab fa-whatsapp"></i>
+        Start conversation on WhatsApp →
+      </a>
+      <div class="contact-emails">
+        <span>Or email:</span>
+        <a href="/cdn-cgi/l/email-protection#097a7c7979667b7d496c686e656c7a61686d667e277d6c6a61676665666e70"><span class="__cf_email__" data-cfemail="10636560607f6264507571777c75637871747f673e647573787e7f7c7f7769">[email&#160;protected]</span></a>
+        <span class="sep">·</span>
+        <a href="/cdn-cgi/l/email-protection#5615191802171502030564621e64621e16111b171f1a7815191b"><span class="__cf_email__" data-cfemail="0f4c40415b4e4c5b5a5c3d3b473d3b474f48424e4643214c4042">[email&#160;protected]</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     FOOTER
+═══════════════════════════════════ -->
+<footer>
+  <div>
+    <div class="footer-brand">Hamza Saadi <span>— Automation Developer</span></div>
+    <div style="color:var(--muted);font-size:0.8rem;margin-top:4px">Morocco 🇲🇦</div>
+  </div>
+  <div class="footer-links">
+    <a href="https://wa.me/212700979284" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+    <a href="/cdn-cgi/l/email-protection#6e1d1b1e1e011c1a2e0b0f09020b1d060f0a0119401a0b0d06000102010917"><i class="fa fa-envelope"></i> Email</a>
+    <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+  </div>
+  <div class="footer-tagline">
+    Available for projects in Morocco, France & beyond · Built with ♥ in Morocco
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+/* ═══════════════════════════════════
+   CURSOR
+═══════════════════════════════════ */
+const cursor = document.getElementById('cursor');
+const ring   = document.getElementById('cursor-ring');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.style.left = mx+'px'; cursor.style.top = my+'px'; });
+(function animRing() {
+  rx += (mx - rx) * 0.12;
+  ry += (my - ry) * 0.12;
+  ring.style.left = rx+'px';
+  ring.style.top  = ry+'px';
+  requestAnimationFrame(animRing);
+})();
+
+/* ═══════════════════════════════════
+   NAV TOGGLE
+═══════════════════════════════════ */
+function toggleNav() { document.getElementById('navLinks').classList.toggle('open'); }
+function closeNav()  { document.getElementById('navLinks').classList.remove('open'); }
+document.addEventListener('click', e => {
+  if(!e.target.closest('nav')) closeNav();
+});
+
+/* ═══════════════════════════════════
+   CODE LINES BACKGROUND
+═══════════════════════════════════ */
+const codeSnippets = [
+  'import whatsapp_api', 'bot.send_invoice(order)', 'def automate_orders():',
+  'response = requests.get(url)', 'cursor.execute(sql)', 'for order in orders:',
+  'bot.reply("تم استلام طلبك ✓")', 'generate_pdf(invoice)', 'scheduler.run()',
+  'print("✓ Running...")', 'db.commit()', 'if status == "paid":',
+  'alert.send_whatsapp(price)', 'scraper.fetch(avito)', 'api.post("/invoice")',
+  'time_saved += 3', 'while True: process()', 'ENV=production',
+];
+const cl = document.getElementById('codeLines');
+for(let i=0; i<18; i++){
+  const el = document.createElement('div');
+  el.className = 'code-line';
+  el.textContent = codeSnippets[i % codeSnippets.length];
+  el.style.left = (Math.random()*95)+'%';
+  el.style.animationDuration = (12 + Math.random()*18)+'s';
+  el.style.animationDelay = (Math.random()*20)+'s';
+  el.style.fontSize = (9 + Math.random()*5)+'px';
+  cl.appendChild(el);
+}
+
+/* ═══════════════════════════════════
+   TERMINAL COUNTER
+═══════════════════════════════════ */
+let orders = 0, time = 0;
+function tickTerminal() {
+  orders += Math.floor(Math.random()*3);
+  time = (orders * 0.06).toFixed(1);
+  const oc = document.getElementById('orderCount');
+  const ts = document.getElementById('timeSaved');
+  if(oc) oc.textContent = orders;
+  if(ts) ts.textContent = time;
+}
+setInterval(tickTerminal, 1800);
+
+/* ═══════════════════════════════════
+   SCROLL REVEAL
+═══════════════════════════════════ */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+/* ═══════════════════════════════════
+   COUNT-UP ANIMATION
+═══════════════════════════════════ */
+const countObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      const el = entry.target;
+      const target = parseInt(el.dataset.target);
+      let current = 0;
+      const duration = 1600;
+      const step = Math.ceil(target / (duration / 40));
+      const interval = setInterval(() => {
+        current += step;
+        if(current >= target){ current = target; clearInterval(interval); }
+        el.textContent = current;
+      }, 40);
+      countObserver.unobserve(el);
+    }
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('.count').forEach(el => countObserver.observe(el));
+
+/* ═══════════════════════════════════
+   NAV SCROLL EFFECT
+═══════════════════════════════════ */
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('navbar');
+  if(window.scrollY > 50) nav.style.padding = '12px 5%';
+  else nav.style.padding = '18px 5%';
+});
+
+/* ═══════════════════════════════════
+   TESTIMONIALS SLIDER
+═══════════════════════════════════ */
+(function(){
+  const track  = document.getElementById('testimonialsTrack');
+  const dotsEl = document.getElementById('tDots');
+  const prev   = document.getElementById('tPrev');
+  const next   = document.getElementById('tNext');
+  if(!track) return;
+
+  const cards = track.querySelectorAll('.testimonial-card');
+  const total = cards.length;
+  const perView = () => window.innerWidth <= 720 ? 1 : 2;
+  let current = 0;
+  let autoTimer;
+
+  const maxSlides = () => Math.max(1, total - perView() + 1);
+
+  function buildDots(){
+    dotsEl.innerHTML = '';
+    for(let i = 0; i < maxSlides(); i++){
+      const d = document.createElement('button');
+      d.className = 't-dot-btn' + (i === current ? ' active' : '');
+      d.addEventListener('click', () => { goTo(i); startAuto(); });
+      dotsEl.appendChild(d);
+    }
+  }
+
+  function goTo(idx){
+    const ms = maxSlides();
+    current = Math.max(0, Math.min(idx, ms - 1));
+    const cardW = cards[0].getBoundingClientRect().width + 2;
+    track.style.transform = `translateX(-${current * cardW}px)`;
+    dotsEl.querySelectorAll('.t-dot-btn').forEach((d,i) => d.classList.toggle('active', i === current));
+  }
+
+  function startAuto(){
+    clearInterval(autoTimer);
+    autoTimer = setInterval(() => goTo((current + 1) % maxSlides()), 4800);
+  }
+
+  prev.addEventListener('click', () => { goTo(current - 1); startAuto(); });
+  next.addEventListener('click', () => { goTo(current + 1); startAuto(); });
+
+  let tx = 0;
+  track.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, {passive:true});
+  track.addEventListener('touchend',   e => {
+    const dx = tx - e.changedTouches[0].clientX;
+    if(Math.abs(dx) > 40){ goTo(dx > 0 ? current+1 : current-1); startAuto(); }
+  }, {passive:true});
+
+  window.addEventListener('resize', () => { buildDots(); goTo(0); });
+  buildDots();
+  startAuto();
+})();
+</script>
+</body>
+</html>
