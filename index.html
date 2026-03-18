@@ -1053,6 +1053,446 @@ footer {
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
+
+/* ═══════════════════════════════════
+   STORY / EAGLESHADOW SECTION
+═══════════════════════════════════ */
+#story {
+  background: linear-gradient(180deg, #0E0E16 0%, var(--bg) 100%);
+  position: relative;
+  overflow: hidden;
+}
+#story::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px; height: 400px;
+  background: radial-gradient(ellipse, rgba(201,168,76,0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+.story-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+@media(max-width: 800px) {
+  .story-inner { grid-template-columns: 1fr; gap: 3rem; }
+}
+.story-text-block p {
+  color: var(--muted);
+  font-size: 1.05rem;
+  line-height: 1.9;
+  margin-bottom: 1.6rem;
+  font-weight: 300;
+}
+.story-text-block p strong { color: var(--white); font-weight: 600; }
+.story-year-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 5px 16px;
+  background: rgba(201,168,76,0.08);
+  border: 1px solid rgba(201,168,76,0.22);
+  border-radius: 100px;
+  font-size: 0.76rem;
+  color: var(--gold);
+  letter-spacing: 0.12em;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 1.8rem;
+}
+.story-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 2.8rem;
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition);
+}
+.story-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold-dim), var(--gold), var(--teal), var(--gold));
+}
+.story-card::after {
+  content: '';
+  position: absolute;
+  bottom: -60px; right: -60px;
+  width: 220px; height: 220px;
+  background: radial-gradient(circle, rgba(201,168,76,0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+.story-card:hover {
+  border-color: rgba(201,168,76,0.3);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.35), 0 0 0 1px rgba(201,168,76,0.12);
+  transform: translateY(-4px);
+}
+.story-card-logo {
+  font-family: var(--ff-display);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 0.04em;
+  margin-bottom: 0.3rem;
+  line-height: 1;
+}
+.story-card-tagline {
+  font-size: 0.78rem;
+  color: var(--muted);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-bottom: 1.6rem;
+  padding-bottom: 1.6rem;
+  border-bottom: 1px solid var(--border);
+}
+.story-card-desc {
+  color: var(--white);
+  font-size: 0.93rem;
+  line-height: 1.75;
+  margin-bottom: 2rem;
+  font-weight: 300;
+}
+.story-card-link {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 13px 28px;
+  background: transparent;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  transition: var(--transition);
+  cursor: none;
+  position: relative;
+  z-index: 1;
+}
+.story-card-link:hover {
+  background: var(--gold);
+  color: var(--bg);
+  box-shadow: 0 10px 30px rgba(201,168,76,0.25);
+}
+.story-card-link i { font-size: 0.78rem; }
+
+/* ═══════════════════════════════════
+   COURSES SECTION
+═══════════════════════════════════ */
+#courses {
+  background: #0E0E16;
+  position: relative;
+}
+.courses-certified-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.2rem;
+  margin-top: 3rem;
+}
+@media(max-width: 1000px) { .courses-certified-grid { grid-template-columns: repeat(2, 1fr); } }
+@media(max-width: 560px)  { .courses-certified-grid { grid-template-columns: 1fr; } }
+
+.course-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.6rem 1.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.8rem;
+}
+.course-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  transform: scaleX(0);
+  transition: transform 0.4s ease;
+}
+.course-card:hover::before { transform: scaleX(1); }
+.course-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(201,168,76,0.25);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+  background: #15151F;
+}
+.course-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.course-provider-badge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 100px;
+  border: 1px solid;
+}
+.badge-edraak  { color: #F59E0B; border-color: rgba(245,158,11,0.35); background: rgba(245,158,11,0.08); }
+.badge-google  { color: #4ADE80; border-color: rgba(74,222,128,0.35); background: rgba(74,222,128,0.08); }
+.badge-cisco   { color: var(--teal); border-color: rgba(45,212,191,0.35); background: rgba(45,212,191,0.08); }
+.badge-default { color: var(--muted); border-color: rgba(136,136,150,0.3); background: rgba(136,136,150,0.06); }
+
+.course-card-eye {
+  color: var(--muted);
+  font-size: 0.85rem;
+  opacity: 0.5;
+  transition: opacity 0.3s, color 0.3s;
+}
+.course-card:hover .course-card-eye { opacity: 1; color: var(--gold); }
+.course-card-title {
+  font-family: var(--ff-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.2;
+  margin-top: 0.4rem;
+}
+.courses-self-box {
+  margin-top: 1.4rem;
+  background: var(--bg-card);
+  border: 1px dashed rgba(201,168,76,0.2);
+  border-radius: 8px;
+  padding: 1.8rem 2rem;
+  transition: border-color 0.3s;
+}
+.courses-self-box:hover { border-color: rgba(201,168,76,0.4); }
+.courses-self-label {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-bottom: 1rem;
+  font-weight: 500;
+  display: flex; align-items: center; gap: 8px;
+}
+.courses-self-label::before {
+  content: '';
+  display: inline-block;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--muted);
+  opacity: 0.4;
+}
+.courses-self-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+.courses-self-list li {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 7px 16px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 100px;
+  font-size: 0.83rem;
+  color: var(--white);
+  transition: border-color 0.3s, color 0.3s;
+}
+.courses-self-list li::before {
+  content: '▸';
+  color: var(--gold);
+  font-size: 0.7rem;
+  opacity: 0.7;
+}
+.courses-self-list li:hover {
+  border-color: rgba(201,168,76,0.3);
+  color: var(--gold);
+}
+
+/* Eye button */
+.course-card-eye-btn {
+  background: none;
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 6px;
+  width: 32px; height: 32px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--muted);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+.course-card-eye-btn:hover,
+.course-card:hover .course-card-eye-btn {
+  background: rgba(201,168,76,0.12);
+  border-color: var(--gold);
+  color: var(--gold);
+  transform: scale(1.1);
+}
+
+/* ═══════════════════════════════════
+   CERTIFICATE MODAL
+═══════════════════════════════════ */
+.cert-modal {
+  position: fixed; inset: 0;
+  z-index: 99999;
+  display: flex; align-items: center; justify-content: center;
+  padding: 1.5rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s cubic-bezier(0.16,1,0.3,1);
+}
+.cert-modal.open {
+  opacity: 1;
+  pointer-events: all;
+}
+.cert-modal-backdrop {
+  position: absolute; inset: 0;
+  background: rgba(5,5,10,0.88);
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+}
+.cert-modal-box {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid rgba(201,168,76,0.25);
+  border-radius: 14px;
+  width: 100%;
+  max-width: 760px;
+  overflow: hidden;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.7), 0 0 0 1px rgba(201,168,76,0.1);
+  transform: translateY(30px) scale(0.97);
+  transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+}
+.cert-modal.open .cert-modal-box {
+  transform: translateY(0) scale(1);
+}
+.cert-modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.6rem 1.8rem 1.2rem;
+  border-bottom: 1px solid var(--border);
+  background: rgba(201,168,76,0.03);
+}
+.cert-modal-provider {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.3rem;
+}
+.cert-modal-title {
+  font-family: var(--ff-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--white);
+}
+.cert-modal-close {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: var(--muted);
+  width: 36px; height: 36px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+.cert-modal-close:hover {
+  background: rgba(201,168,76,0.12);
+  border-color: var(--gold);
+  color: var(--gold);
+}
+.cert-modal-img-wrap {
+  position: relative;
+  width: 100%;
+  min-height: 360px;
+  background: #0a0a12;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+#certModalImg {
+  width: 100%;
+  height: auto;
+  max-height: 480px;
+  object-fit: contain;
+  display: block;
+}
+.cert-modal-placeholder {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  background:
+    linear-gradient(rgba(201,168,76,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201,168,76,0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+.cert-placeholder-inner {
+  text-align: center;
+  padding: 2rem;
+}
+.cert-placeholder-icon {
+  font-size: 3.5rem;
+  color: rgba(201,168,76,0.2);
+  margin-bottom: 1rem;
+  animation: certPulse 2.5s ease infinite;
+}
+@keyframes certPulse {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50%       { opacity: 0.6; transform: scale(1.05); }
+}
+.cert-placeholder-text {
+  font-family: var(--ff-display);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--muted);
+  margin-bottom: 0.8rem;
+}
+.cert-placeholder-hint {
+  font-size: 0.8rem;
+  color: rgba(136,136,150,0.6);
+  line-height: 1.6;
+}
+.cert-placeholder-hint span {
+  color: var(--gold);
+  font-weight: 600;
+  font-family: 'Courier New', monospace;
+  background: rgba(201,168,76,0.08);
+  padding: 2px 8px;
+  border-radius: 4px;
+  border: 1px solid rgba(201,168,76,0.2);
+}
+.cert-modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  padding: 1rem 1.8rem;
+  border-top: 1px solid var(--border);
+  background: rgba(201,168,76,0.02);
+}
+.cert-modal-badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: rgba(201,168,76,0.08);
+  border: 1px solid rgba(201,168,76,0.2);
+  padding: 5px 14px;
+  border-radius: 100px;
+}
+.cert-modal-note {
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+.cert-modal-note strong { color: var(--white); }
 </style>
 </head>
 <body>
@@ -1305,6 +1745,101 @@ footer {
 </section>
 
 <!-- ═══════════════════════════════════
+     STORY / EAGLESHADOW
+═══════════════════════════════════ -->
+<section id="story">
+  <div class="story-inner">
+
+    <!-- Left: text -->
+    <div>
+      <div class="reveal">
+        <p class="section-label">The Journey</p>
+        <h2 class="section-title">From passion<br>to <span class="italic">platform</span></h2>
+      </div>
+      <div class="story-text-block reveal reveal-delay-1">
+        <p>My journey in software development began in <strong>2016</strong>, driven by a passion for building functional digital solutions.</p>
+        <p>This path led to the launch of <strong>EagleShadow</strong> — my proprietary platform dedicated to delivering high-quality programming services to a global audience.</p>
+        <p>Since then, I have remained committed to continuous growth, consistently evolving alongside the latest advancements in technology.</p>
+      </div>
+    </div>
+
+    <!-- Right: EagleShadow card -->
+    <div class="reveal reveal-delay-2">
+      <div class="story-card">
+        <div class="story-year-badge">✦ Founded 2016</div>
+        <div class="story-card-logo">EagleShadow</div>
+        <div class="story-card-tagline">Programming Services Platform</div>
+        <p class="story-card-desc">
+          A proprietary platform built to deliver world-class programming solutions — from smart automation to full-stack development — serving clients on a global scale.
+        </p>
+        <a href="https://eagleshadow.technology" target="_blank" rel="noopener" class="story-card-link">
+          Visit EagleShadow <i class="fa fa-arrow-up-right-from-square"></i>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
+     COURSES
+═══════════════════════════════════ -->
+<section id="courses">
+  <div class="reveal">
+    <p class="section-label">Continuous Learning</p>
+    <h2 class="section-title">Distance Learning <span class="italic">&amp; Courses</span></h2>
+    <p style="color:var(--muted);max-width:500px;margin-top:0.5rem;font-size:0.95rem;line-height:1.7">
+      Certified programs and self-directed learning that shaped my technical foundation.
+    </p>
+  </div>
+
+  <div class="courses-certified-grid">
+
+    <div class="course-card reveal reveal-delay-1" data-cert-title="Advanced MS Excel" data-cert-provider="Edraak" data-cert-img="excel.png">
+      <div class="course-card-top">
+        <span class="course-provider-badge badge-edraak">Edraak</span>
+        <button class="course-card-eye-btn" aria-label="View Certificate"><i class="fa fa-eye"></i></button>
+      </div>
+      <div class="course-card-title">Advanced MS Excel</div>
+    </div>
+
+    <div class="course-card reveal reveal-delay-2" data-cert-title="Python Intro" data-cert-provider="Edraak" data-cert-img="python.png">
+      <div class="course-card-top">
+        <span class="course-provider-badge badge-edraak">Edraak</span>
+        <button class="course-card-eye-btn" aria-label="View Certificate"><i class="fa fa-eye"></i></button>
+      </div>
+      <div class="course-card-title">Python Intro</div>
+    </div>
+
+    <div class="course-card reveal reveal-delay-3" data-cert-title="Digital Marketing" data-cert-provider="Google" data-cert-img="ecom.png">
+      <div class="course-card-top">
+        <span class="course-provider-badge badge-google">Google</span>
+        <button class="course-card-eye-btn" aria-label="View Certificate"><i class="fa fa-eye"></i></button>
+      </div>
+      <div class="course-card-title">Digital Marketing</div>
+    </div>
+
+    <div class="course-card reveal reveal-delay-4" data-cert-title="CyberSecurity Principles" data-cert-provider="Cisco N.A" data-cert-img="cisco.png">
+      <div class="course-card-top">
+        <span class="course-provider-badge badge-cisco">Cisco N.A</span>
+        <button class="course-card-eye-btn" aria-label="View Certificate"><i class="fa fa-eye"></i></button>
+      </div>
+      <div class="course-card-title">CyberSecurity Principles</div>
+    </div>
+
+  </div>
+
+  <div class="courses-self-box reveal">
+    <div class="courses-self-label">Self-Taught via YouTube (Not Certified)</div>
+    <ul class="courses-self-list">
+      <li>Advanced Python Programming</li>
+      <li>Full Stack Web: HTML, CSS, JS, JQuery (Front) + Python, Django, MySQL (Back)</li>
+      <li>3D Game Conception: Unity 3D &amp; Blender 3D</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════
      PROCESS
 ═══════════════════════════════════ -->
 <section id="process">
@@ -1499,9 +2034,9 @@ footer {
       </a>
       <div class="contact-emails">
         <span>Or email:</span>
-        <a href="mailto:contactus24h24h@gmail.com">contactus24h24h@gmail.com</span></a>
+        <a href="/cdn-cgi/l/email-protection#c3a0acadb7a2a0b7b6b0f1f7abf1f7ab83a4aea2aaafeda0acae"><span class="__cf_email__" data-cfemail="8eede1e0faefedfafbfdbcbae6bcbae6cee9e3efe7e2a0ede1e3">[email&#160;protected]</span></span></a>
         <span class="sep">·</span>
-        <a href="mailto:support@eagleshadow.technology">support@eagleshadow.technology</span></a>
+        <a href="/cdn-cgi/l/email-protection#b8cbcdc8c8d7caccf8ddd9dfd4ddcbd0d9dcd7cf96ccdddbd0d6d7d4d7dfc1"><span class="__cf_email__" data-cfemail="3e4d4b4e4e514c4a7e5b5f59525b4d565f5a5149104a5b5d56505152515947">[email&#160;protected]</span></span></a>
       </div>
     </div>
   </div>
@@ -1517,7 +2052,7 @@ footer {
   </div>
   <div class="footer-links">
     <a href="https://wa.me/212700979284" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-    <a href="mailto:contactus24h24h@gmail.com"><i class="fa fa-envelope"></i> Email</a>
+    <a href="/cdn-cgi/l/email-protection#63000c0d17020017161051570b51570b23040e020a0f4d000c0e"><i class="fa fa-envelope"></i> Email</a>
     <a href="https://www.linkedin.com/in/hamzasaadi019" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
   </div>
   <div class="footer-tagline">
@@ -1529,7 +2064,7 @@ footer {
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 /* ═══════════════════════════════════
    CURSOR
 ═══════════════════════════════════ */
@@ -1674,17 +2209,107 @@ window.addEventListener('scroll', () => {
   prev.addEventListener('click', () => { goTo(current - 1); startAuto(); });
   next.addEventListener('click', () => { goTo(current + 1); startAuto(); });
 
-  let tx = 0;
-  track.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, {passive:true});
-  track.addEventListener('touchend',   e => {
-    const dx = tx - e.changedTouches[0].clientX;
-    if(Math.abs(dx) > 40){ goTo(dx > 0 ? current+1 : current-1); startAuto(); }
-  }, {passive:true});
+  window.addEventListener('resize', () => { buildDots(); goTo(current); });
 
-  window.addEventListener('resize', () => { buildDots(); goTo(0); });
   buildDots();
   startAuto();
 })();
 </script>
+
+<!-- ═══════════════════════════════════
+     CERTIFICATE MODAL
+═══════════════════════════════════ -->
+<div id="certModal" class="cert-modal" role="dialog" aria-modal="true" aria-labelledby="certModalTitle">
+  <div class="cert-modal-backdrop" id="certModalBackdrop"></div>
+  <div class="cert-modal-box">
+    <div class="cert-modal-header">
+      <div>
+        <div class="cert-modal-provider" id="certModalProvider"></div>
+        <div class="cert-modal-title" id="certModalTitle"></div>
+      </div>
+      <button class="cert-modal-close" id="certModalClose" aria-label="Close">
+        <i class="fa fa-xmark"></i>
+      </button>
+    </div>
+    <div class="cert-modal-img-wrap">
+      <img id="certModalImg" src="" alt="Certificate" style="display:none;" />
+      <div class="cert-modal-placeholder" id="certModalPlaceholder" style="display:none;">
+        <div class="cert-placeholder-inner">
+          <div class="cert-placeholder-icon"><i class="fa fa-certificate"></i></div>
+          <div class="cert-placeholder-text">Certificate image coming soon</div>
+          <div class="cert-placeholder-hint">Add file: <span id="certModalFileName"></span></div>
+        </div>
+      </div>
+    </div>
+    <div class="cert-modal-footer">
+      <span class="cert-modal-badge"><i class="fa fa-shield-halved"></i> Certified</span>
+      <span class="cert-modal-note">Official certificate issued by <strong id="certModalProviderFooter"></strong></span>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ═══════════════════════════════════
+   CERTIFICATE MODAL
+═══════════════════════════════════ */
+(function(){
+  var modal          = document.getElementById('certModal');
+  var backdrop       = document.getElementById('certModalBackdrop');
+  var closeBtn       = document.getElementById('certModalClose');
+  var imgEl          = document.getElementById('certModalImg');
+  var placeholder    = document.getElementById('certModalPlaceholder');
+  var titleEl        = document.getElementById('certModalTitle');
+  var providerEl     = document.getElementById('certModalProvider');
+  var providerFooter = document.getElementById('certModalProviderFooter');
+  var fileNameEl     = document.getElementById('certModalFileName');
+
+  function openModal(card) {
+    var title    = card.getAttribute('data-cert-title')    || 'Certificate';
+    var provider = card.getAttribute('data-cert-provider') || '';
+    var imgSrc   = card.getAttribute('data-cert-img')      || '';
+
+    titleEl.textContent        = title;
+    providerEl.textContent     = provider;
+    providerFooter.textContent = provider;
+    fileNameEl.textContent     = imgSrc;
+
+    imgEl.style.display       = 'none';
+    placeholder.style.display = 'flex';
+
+    imgEl.onload = function() {
+      placeholder.style.display = 'none';
+      imgEl.style.display       = 'block';
+    };
+    imgEl.onerror = function() {
+      imgEl.style.display       = 'none';
+      placeholder.style.display = 'flex';
+    };
+    imgEl.src = imgSrc;
+
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+    imgEl.onload = null;
+    imgEl.onerror = null;
+  }
+
+  var eyeBtns = document.querySelectorAll('.course-card-eye-btn');
+  for(var i = 0; i < eyeBtns.length; i++){
+    eyeBtns[i].addEventListener('click', function(e){
+      e.stopPropagation();
+      openModal(this.closest('.course-card'));
+    });
+  }
+
+  closeBtn.addEventListener('click', closeModal);
+  backdrop.addEventListener('click', closeModal);
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeModal(); });
+})();
+</script>
+
 </body>
 </html>
